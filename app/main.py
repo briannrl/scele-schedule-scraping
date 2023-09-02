@@ -3,9 +3,12 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, CallbackContext
 from responses import show_current_schedule, schedule_generator
 from decouple import config
+from keep_alive import keep_alive
 
 TOKEN: Final = config("TOKEN", cast=str)
 BOT_USERNAME: Final = "@SceleMtiScrapingBot"
+
+keep_alive()
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # await update.message.reply_text('Viva viva viva fasilkom! teknik bukan apalagi mipa! This bot will text you if new update on class schedule is posted on scele.')

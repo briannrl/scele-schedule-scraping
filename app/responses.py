@@ -3,7 +3,6 @@ import requests
 from datetime import datetime
 # from keep_alive import keep_alive
 
-# keep_alive()
 def schedule_generator():
     url = "https://scele.cs.ui.ac.id/mti/"
     page = requests.get(url)
