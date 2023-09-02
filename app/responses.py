@@ -17,7 +17,7 @@ def schedule_generator():
     if not ((datetime.now().date() == post_date) and ('[Informasi] Perkuliahan' in soup.find('div', class_='topic firstpost starter').find('div', class_='subject').text)):
         # time.sleep(1800)
         # continue
-        return "wait 30 minutes, because there's no new schedule update today."
+        return
     else:
         latest_info_url = soup.find('div', class_ ="forumpost clearfix firstpost starter").find_all('a')[2].get('href')
         # print(latest_info_url)
