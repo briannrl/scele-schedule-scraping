@@ -24,10 +24,15 @@ async def callback_show_message(context: ContextTypes.DEFAULT_TYPE):
         #                      text=schedule_generator())
 
 async def auto_show_schedule_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    jobs = context.job_queue.jobs()
     chat_id = update.message.chat_id
     name = update.effective_chat.full_name
-    await context.bot.send_message(chat_id=chat_id, text="Wait for new schedule update.\n The bot will refresh every 30 minutes to check new schedule update.")
-    context.job_queue.run_repeating(callback_show_message, interval=1800, first=1, data=name, chat_id=chat_id)
+
+    if len(jobs) > 0:
+        await context.bot.send_message(chat_id=chat_id, text="auto_show is currently running")
+    else:
+        await context.bot.send_message(chat_id=chat_id, text="Wait for new schedule update.\n The bot will refresh every 30 minutes to check new schedule update.")
+        context.job_queue.run_repeating(callback_show_message, interval=1800, first=1, data=name, chat_id=chat_id)
 
 async def stop_sending_schedule(update: Update, context: ContextTypes.DEFAULT_TYPE):
     jobs = context.job_queue.jobs()
