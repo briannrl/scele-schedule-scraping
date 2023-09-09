@@ -53,15 +53,16 @@ async def reply_unknown_message(update: Update, context: ContextTypes.DEFAULT_TY
 async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print(f'Update {update} caused error {context.error}')
 
-app = Application.builder().token(TOKEN).build()
+if __name__ == "__main__":
+    app = Application.builder().token(TOKEN).build()
 
-app.add_handler(CommandHandler('start', start_command))
-app.add_handler(CommandHandler('show_schedule', show_schedule_command))
-app.add_handler(CommandHandler('auto_show', auto_show_schedule_command))
-app.add_handler(CommandHandler('stop', stop_sending_schedule))
+    app.add_handler(CommandHandler('start', start_command))
+    app.add_handler(CommandHandler('show_schedule', show_schedule_command))
+    app.add_handler(CommandHandler('auto_show', auto_show_schedule_command))
+    app.add_handler(CommandHandler('stop', stop_sending_schedule))
 
-app.add_handler(MessageHandler(filters.TEXT, reply_unknown_message))
+    app.add_handler(MessageHandler(filters.TEXT, reply_unknown_message))
 
-app.add_error_handler(error)
+    app.add_error_handler(error)
 
-app.run_polling(poll_interval=3)
+    app.run_polling(poll_interval=3)
