@@ -28,8 +28,8 @@ def schedule_generator():
     if not ((datetime.now().date() == scraping.post_date) and ('[Informasi] Perkuliahan' in scraping.soup.find('div', class_='topic firstpost starter').find('div', class_='subject').text)):
         return
     else:
-        scraping.scrape_schedule()
+        return scraping.scrape_schedule()
 
 def show_current_schedule():
     scraping = Scraping()
-    scraping.scrape_schedule()
+    return scraping.scrape_schedule()
